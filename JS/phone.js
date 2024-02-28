@@ -1,33 +1,35 @@
-const loadPhone = async(searchText) =>{
+const loadPhone = async(searchText,isShowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data
-     displaPhone(phones);
+     displaPhone(phones,isShowAll);
 
     
 
 }
 
 
-const displaPhone = phones => {
+const displaPhone = (phones,isShowAll) => {
  const phonecontainer = document.getElementById('phone-container');
  // clear phone container cards before adding new cards
     phonecontainer.textContent=''; 
 //display show all button if there are more than 12
     const showAllContainer = document.getElementById('show-all-container');
-      if( phones.length > 12){
+      if( phones.length > 12 && !isShowAll){
         showAllContainer.classList.remove('hidden')
 
       }
       else{
         showAllContainer.classList.add('hidden')
       }
+      
+          // display show items limited
+        
+      if(!isShowAll){
+          phones = phones.slice(0,12)
+      }
 
-    // display show items limited
-    phones = phones.slice(0,12);
-
-
-    phones.forEach(phone =>{
+phones.forEach(phone =>{
         const phoneCard = document.createElement('div');
         phoneCard.classList = `card p-4 bg-gray-100 shadow-xl`
         phoneCard.innerHTML=`
@@ -41,7 +43,6 @@ const displaPhone = phones => {
         </div>
     </div>`
       phonecontainer.appendChild(phoneCard);
-
       });
       // hide loading spinner
       toggleLoadingSpinner(false)
@@ -49,12 +50,12 @@ const displaPhone = phones => {
 
 loadPhone();
   // handle search button
-  const handleSearch = () =>{
-    toggleLoadingSpinner();
+  const handleSearch = (isShowAll) =>{
+    toggleLoadingSpinner(true,isShowAll);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     console.log(searchText);
-    loadPhone(searchText);
+    loadPhone(searchText,isShowAll);
   }
 
 
@@ -68,4 +69,6 @@ const toggleLoadingSpinner = (isLoading)=>{
     }
 }
 
-  
+  const handleShowAll =() =>{
+    handleSearch(true);
+  }
