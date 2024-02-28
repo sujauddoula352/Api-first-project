@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css tailwindcss and daisyUi links -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!--  Css style link -->
+
+
+    <title>phone-hunter</title>
+</head>
+<body>
+    <header>
+        <h1 class="text-4xl"> Hunting Phone</h1>
+    </header>
+    <main>
+ <section class="container mx-auto mt-8">
+            <section class="p-5 m-5 bg-gray-100 rounded-xl">
+                <input id="search-field" type="text" placeholder="search....." class=" input input-bordered w-[350px]">
+                <button onclick="handleSearch()" class="btn btn-primary font-2xl w-36"> Search</button>
+            </section>
+  <!-- search result -->
+           <section>
+            <div id="loading-spinner" class="text-center mt-52 hidden">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
+            <div id="phone-container" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
+            </div>
+            <div id="show-all-container" class="hidden text-center mt-7 bg-red-300">
+                <button class="btn btn-accent ">SHOW ALL</button>
+            </div>
+           </section>
+
+</section>
+
+
+
+    </main>
+    <footer></footer>
+
+
+    <script src="./JS/phone.js"></script>
+</body>
+</html>
